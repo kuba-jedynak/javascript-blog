@@ -24,15 +24,15 @@
             activeArticle.classList.remove('active');
         }
 
-        /* get 'href' attribute from the clicked link */
+        /* [DONE] get 'href' attribute from the clicked link */
         const articleSelector = clickedElement.getAttribute('href');
         console.log(articleSelector);
 
-        /* find the correct article using the selector (value of 'href' attribute) */
+        /* [DONE]find the correct article using the selector (value of 'href' attribute) */
         const targetArticle = document.querySelector(articleSelector);
         console.log(targetArticle);
 
-        /* add class 'active' to the correct article */
+        /* [DONE] add class 'active' to the correct article */
         targetArticle.classList.add('active');
     }
 
@@ -41,4 +41,39 @@
     for (let link of links) {
         link.addEventListener('click', titleClickHandler);
     }
+
+    const optArticleSelector = '.post',
+        optTitleSelector = '.post-title',
+        optTitleListSelector = '.titles';
+
+    function generateTitleLinks() {
+
+        /* remove contents of titleList */
+        const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
+
+        /* for each article */
+        const articles = document.querySelectorAll(optArticleSelector);
+        for (let article of articles) {
+            const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
+
+            /* get the article id */
+            const articleId = article.getAttribute('id');
+            //console.log(articleId);
+
+            /* find the title element */
+            const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+            //console.log(articleTitle);
+
+            /* get the title from the title element */
+
+            /* create HTML of the link */
+            const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+            console.log(linkHTML);
+
+            /* insert link into titleList */
+        }
+
+    }
+
+    generateTitleLinks();
 }
