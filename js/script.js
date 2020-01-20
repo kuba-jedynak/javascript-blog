@@ -29,7 +29,10 @@
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author',
-    optTagsListSelector = '.tags.list';
+    optTagsListSelector = '.tags .list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-';
+
     
 
   function generateTitleLinks(customSelector = '') {
@@ -73,6 +76,14 @@
     return params;
   }
 
+  function calculateTagClass(count, params) {
+    const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const percentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+    return optCloudClassPrefix + classNumber;
+  }
+
   function generateTags() {
     /*[NEW] create a new variable allTags with an empty object */
     let allTags = {};
@@ -112,12 +123,14 @@
     const tagList = document.querySelector(' .tags');
     /* [NEW] creata variable for all links HTML code*/
     const tagsParams = calculateTagsParams(allTags);
-    console.log('tagsParams:', tagsParams);
+    //console.log('tagsParams:', tagsParams);
     let allTagsHTML = '';
     /*[NEW] START LOOP: for each tag in allTags: */
     for(let tag in allTags){
       /*[NEW] generate code of a link and add it to AllTagsHTML */
-      allTagsHTML += '<li><a href="#' + tag + '"> ' + tag + ' (' + allTags[tag] + ')' + '</a></li>';
+      const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag +  ' </a></li>';
+      //console.log('tagLinkHTML:', tagLinkHTML);
+      allTagsHTML += tagLinkHTML;
     }
     /*[NEW] END LOOP: for each tag in allTags */
     /*[NEW] add html from allTagsHTML to tagList */
@@ -158,7 +171,7 @@
 
   function addClickListenersToTags() {
     /* find all links to tags */
-    const links = document.querySelectorAll('.post-tags li a');
+    const links = document.querySelectorAll('.post-tags li a, .list.tags a');
 
     /* START LOOP: for each link */
     for (let link of links) {
