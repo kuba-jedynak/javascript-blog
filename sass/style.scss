@@ -66,6 +66,9 @@ body {
 
 .sidebar {
   flex: 1 0 0;
+  a {
+    text-decoration: none;
+  }
 }
 
 .posts {
@@ -110,9 +113,7 @@ body {
 .tags li{
   display: inline-block;
   margin: 5px;
-  a {
-    text-decoration: none;
-  }
+  
 }
 
 /* Authors */
