@@ -136,4 +136,12 @@ body {
 .post-tags p {
   margin: 0 10px 0 0;
 }
+
+.post-tags li:after {
+  content: ", ";
+}
+
+.post-tags li:last-child:after {
+  content: none;
+}
 /*# sourceMappingURL=style.css.map */

@@ -142,4 +142,8 @@ body {
   p {
     margin: 0 10px 0 0;
   }
+  li:after {content: ", ";}
+  li:last-child:after {
+    content: none;
+  }
 }
